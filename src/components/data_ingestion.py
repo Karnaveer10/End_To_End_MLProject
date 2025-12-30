@@ -11,7 +11,8 @@ from src.exception import CustomException
 import pandas as pd
 from sklearn.model_selection import train_test_split 
 from dataclasses import dataclass  #  Data class (immutable config)
-
+from src.components.data_transformation import DataTransformationConfig
+from src.components.data_transformation import DataTransformation
 @dataclass  #  @dataclass = auto __init__, no boilerplate
 class DataIngestionConfig:
     
@@ -57,7 +58,7 @@ class DataIngestion:
             
         except Exception as e:
             self.logger.error(f"Data ingestion failed: {e}")  #  Log error
-            raise CustomException(e, sys) from e  # ✅ CustomException(e, sys) syntax
+            raise CustomException(e, sys) # ✅ CustomException(e, sys) syntax
 
 if __name__ == "__main__":  # ✅ Run only if direct execution (not import)
     """Entry point - creates DataIngestion instance + runs pipeline"""
@@ -66,6 +67,10 @@ if __name__ == "__main__":  # ✅ Run only if direct execution (not import)
     print(f"Train saved: {train_data}")
     print(f"Test saved:  {test_data}")
     print("Check artifacts/ folder!")
+    
+    obj2 = DataTransformation()
+    train_arr,test_arr,_=obj2.initiate_data_transformation(train_data,test_data)
+
 
 
 '''
