@@ -60,9 +60,9 @@ class DataIngestion:
             
         except Exception as e:
             self.logger.error(f"Data ingestion failed: {e}")  #  Log error
-            raise CustomException(e, sys) # ✅ CustomException(e, sys) syntax
+            raise CustomException(e, sys) # CustomException(e, sys) syntax
 
-if __name__ == "__main__":  # ✅ Run only if direct execution (not import)
+if __name__ == "__main__":  # Run only if direct execution (not import)
     """Entry point - creates DataIngestion instance + runs pipeline"""
     obj = DataIngestion()
     train_data, test_data = obj.initiate_data_ingestion()
