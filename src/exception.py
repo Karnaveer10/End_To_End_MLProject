@@ -15,7 +15,7 @@ def error_message_detail(error, error_detail: sys):
     - Line number (45)
     - Error message (ValueError: invalid shape)
     """
-    _, _, exc_tb = error_detail
+    _, _, exc_tb = error_detail.exc_info()
     
     file_name = exc_tb.tb_frame.f_code.co_filename  
     line_number = exc_tb.tb_lineno        
