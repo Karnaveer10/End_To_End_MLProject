@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request, Form
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 
 from src.pipeline.predict_pipeline import CustomData, PredictPipeline
@@ -12,17 +12,14 @@ app = FastAPI()
 templates = Jinja2Templates(directory="templates")
 
 
-# -------------------- HOME PAGE --------------------
+# -------------------- HOME PAGE (REDIRECT) --------------------
 
-@app.get("/", response_class=HTMLResponse)
-async def home(request: Request):
+@app.get("/", response_class=RedirectResponse)
+async def home():
     """
-    Show the landing page (index.html)
+    Redirect to the prediction form
     """
-    return templates.TemplateResponse(
-        "index.html",
-        {"request": request}
-    )
+    return RedirectResponse(url="/predictdata")
 
 
 # -------------------- PREDICTION FORM --------------------
